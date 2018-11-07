@@ -1,0 +1,19 @@
+---
+- name: install necessary apt packages
+  apt:
+    name:
+      - 'python3'
+      - 'python3-venv'
+      - 'python3-pip'
+    state: present
+    update_cache: true
+
+- name: install configured additional apt packages
+  apt:
+    name: '{{ hass_packages }}'
+    state: present
+  when: hass_packages is defined
+
+- name: set debian/ubuntu virtualenv command
+  set_fact:
+    hass_virtualenv_command: /usr/bin/python3 -m venv

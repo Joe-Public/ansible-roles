@@ -1,0 +1,104 @@
+---
+# tasks file for hass
+- include: debian.yml
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+- include: centos.yml
+  when: ansible_distribution == "CentOS"
+
+- include: fedora.yml
+  when: ansible_distribution == "Fedora"
+
+- name: enable w1-gpio
+  lineinfile:
+    dest: '/boot/config.txt'
+    line: 'dtoverlay=w1-gpio'
+  when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_w1 is defined and hass_w1
+
+- name: getent passwd
+  getent:
+    database: passwd
+
+- name: create user
+  user:
+    name: "{{ hass_user }}"
+    comment: "Home Assistant"
+    createhome: true
+    system: true
+    groups: dialout
+    shell: "/sbin/nologin"
+  when: hass_user not in getent_passwd
+
+- name: adding user to group gpio
+  user:
+    name: '{{ hass_user }}'
+    groups: 'gpio'
+    append: true
+  when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_w1 is defined and hass_w1 and hass_user in getent_passwd
+
+- name: getent passwd
+  getent:
+    database: passwd
+
+- name: ensure configuration directory exists
+  file:
+    path: '{{ hass_config }}'
+    state: directory
+    mode: 0755
+    owner: '{{ hass_user }}'
+    group: '{{ hass_user }}'
+  when: hass_user in getent_passwd
+
+- name: create hass directory
+  file:
+    path: '{{ hass_virtualenv }}'
+    state: directory
+    mode: 0755
+    owner: '{{ hass_user }}'
+    group: '{{ hass_user }}'
+  when: hass_user in getent_passwd
+
+- name: install wheel
+  pip:
+    name: wheel
+    state: present
+    virtualenv: '{{ hass_virtualenv }}'
+    virtualenv_command: '{{ hass_virtualenv_command }}'
+  become: true
+  become_user: '{{ hass_user }}'
+  when: hass_user in getent_passwd
+
+- name: install home assistant
+  pip:
+    name: homeassistant
+    version: '{{ hass_version }}'
+    virtualenv: '{{ hass_virtualenv }}'
+    virtualenv_command: '{{ hass_virtualenv_command }}'
+  become: true
+  become_user: '{{ hass_user }}'
+  when: hass_user in getent_passwd
+  notify: restart hass
+
+- name: copy home assistant unit file
+  copy:
+    content: |
+      [Unit]
+      Description=Home Assistant
+      After=network.target
+
+      [Service]
+      Type=simple
+      User={{ hass_user }}
+      ExecStart={{ hass_virtualenv }}/bin/hass -c "{{ hass_config }}"
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+    dest: /etc/systemd/system/hass.service
+
+- name: enable home assistant
+  service:
+    name: hass
+    enabled: true
+    state: started
+  when: not ansible_check_mode
