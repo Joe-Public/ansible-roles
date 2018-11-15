@@ -64,5 +64,5 @@ Copyright (c) 2018 Johannes Krausmueller - ISC License
 Author Information
 ------------------
 
-Johannes Krausmueller (johannes@krausmueller.de)
+Johannes Krausmueller (johannes@krausmueller.de)  
 Website: https://www.krausmueller.de
