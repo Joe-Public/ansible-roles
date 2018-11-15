@@ -1,6 +1,6 @@
 ---
 # defaults file for hass
-hass_version: '0.81.6'
+# hass_version: '0.81.6'
 hass_user: 'hass'
 hass_config: '/home/{{ hass_user }}/.homeassistant'
 hass_virtualenv: '/opt/hass'

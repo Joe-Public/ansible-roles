@@ -68,6 +68,19 @@
   become_user: '{{ hass_user }}'
   when: hass_user in getent_passwd
 
+- name: get latest hass version
+  uri:
+    url: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
+    return_content: true
+  check_mode: false
+  register: json_reponse
+  when: hass_version is not defined
+
+- name: set hass_version to latest
+  set_fact:
+    hass_version: '{{ json_reponse.json.name }}'
+  when: hass_version is not defined
+
 - name: install home assistant
   pip:
     name: homeassistant
@@ -76,7 +89,7 @@
     virtualenv_command: '{{ hass_virtualenv_command }}'
   become: true
   become_user: '{{ hass_user }}'
-  when: hass_user in getent_passwd
+  when: hass_user in getent_passwd and hass_version is defined
   notify: restart hass
 
 - name: copy home assistant unit file
