@@ -1,7 +1,17 @@
 Home Assistant
 ==============
 
-An Ansible Role that installs [Home Assistant](https://www.home-assistant.io/) on Debian/Ubuntu. Tested with Debian 9 Stretch.
+An Ansible Role that installs [Home Assistant](https://www.home-assistant.io/). Installation tasks are derived from the [manual installation instructions](https://www.home-assistant.io/docs/installation/raspberry-pi/).
+
+Tested with the help of [Molecule](https://molecule.readthedocs.io/en/latest/) and [Docker](https://www.docker.com/) for:
+* Debian 9 Stretch
+* Debian 10 Buster
+* Ubuntu 18.04
+* Ubuntu 18.10
+* Fedora 28
+* Centos 7
+
+Used in real life only with Raspbian (Debian 9 Stretch).
 
 Requirements
 ------------
@@ -11,11 +21,12 @@ Requirements
 Role Variables
 --------------
 
-- **hass_user**: The linux user Home Assistant is running under. Defaults to `hass`
+- **hass_version**: The version of Home Assistant which will get installed. By default it is not defined and gets the lastest version available.
+- **hass_user**: The linux user Home Assistant is running under. Defaults to `hass`.
 - **hass_virtualenv**: The directory the virtual environment for Home Assistant gets installed to. Defaults to `/opt/hass`.
 - **hass_config**: The directory the configuration for Home Assistant is stored in. Defaults to `/home/hass/.homeassistant`.
-- **hass_w1** Enables One Wire for Raspberry Pis. Usefull if you connect One Wire sensors directly to your Raspberry Pi and want to add them to Home Assistant. By default it is disabled (`false`).
-- **hass_apt_packages** List of apt packages whoch should be installed in addition. Might be useful if you use Home Assistant components which depend on additional packages (e.g. [FRITZ!Box Net Monitor](https://www.home-assistant.io/components/sensor.fritzbox_netmonitor/)). By default it is not defined.
+- **hass_w1** Enables One Wire for Raspberry Pis. Usefull if you connect One Wire sensors directly to your Raspberry Pi and want to add them to Home Assistant. By default it is disabled (`false`). If enabled a restart of the system is needed after the playbook has been deployed.
+- **hass_apt_packages** List of apt packages which should be installed in addition. Might be useful if you use Home Assistant components which depend on additional packages (e.g. [FRITZ!Box Net Monitor](https://www.home-assistant.io/components/sensor.fritzbox_netmonitor/)). By default it is not defined.
 
 Dependencies
 ------------
