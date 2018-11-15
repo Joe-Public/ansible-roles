@@ -59,7 +59,7 @@ Example Playbook
 License
 -------
 
-Apache 2.0
+Copyright (c) 2018 Johannes Krausmueller - ISC License
 
 Author Information
 ------------------
