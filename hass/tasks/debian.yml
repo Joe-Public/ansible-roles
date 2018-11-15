@@ -10,9 +10,9 @@
 
 - name: install configured additional apt packages
   apt:
-    name: '{{ hass_packages }}'
+    name: '{{ hass_apt_packages }}'
     state: present
-  when: hass_packages is defined
+  when: hass_apt_packages is defined
 
 - name: set debian/ubuntu virtualenv command
   set_fact:
