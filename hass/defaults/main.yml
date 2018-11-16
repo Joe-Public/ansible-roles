@@ -9,4 +9,6 @@ hass_w1: false
 #   - "spotipy==2.4.4"
 #   - "pysonos"
 # hass_apt_packages:
-#   - 'libxslt-dev'
+#   - libxslt-dev
+#   - libxml2-dev
+#   - python3-lxml
