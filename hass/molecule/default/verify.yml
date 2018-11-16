@@ -36,6 +36,12 @@
       shell: "ls {{ goss_test_directory }}/test_*.yml"
       register: test_files
 
+    - name: get latest hass version
+      uri:
+        url: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
+        return_content: true
+      register: json_reponse
+
     - name: Wait for 5 minutes (home assistant needs some time for the first start)
       pause:
         minutes: 5
@@ -46,6 +52,7 @@
       with_items: "{{ test_files.stdout_lines }}"
       environment:
         distro: "{{ ansible_distribution | lower }}"
+        hass_version: "{{ json_reponse.json.name }}"
 
     - name: Display details about the Goss results
       debug:

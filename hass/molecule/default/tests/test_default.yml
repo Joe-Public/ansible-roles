@@ -8,6 +8,10 @@ file:
     exists: true
     mode: "0755"
     filetype: directory
+  /home/hass/.homeassistant/.HA_VERSION:
+    exists: true
+    contains:
+      - {{ .Env.hass_version }}
 package:
 {{if (or (eq .Env.distro "debian") (eq .Env.distro "ubuntu"))}}
   python3:
