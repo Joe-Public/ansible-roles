@@ -58,16 +58,6 @@
     group: '{{ hass_user }}'
   when: hass_user in getent_passwd
 
-- name: install wheel
-  pip:
-    name: wheel
-    state: present
-    virtualenv: '{{ hass_virtualenv }}'
-    virtualenv_command: '{{ hass_virtualenv_command }}'
-  become: true
-  become_user: '{{ hass_user }}'
-  when: hass_user in getent_passwd
-
 - name: get latest hass version
   uri:
     url: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
@@ -81,10 +71,28 @@
     hass_version: '{{ json_reponse.json.name }}'
   when: hass_version is not defined
 
-- name: install home assistant
+- name: set fact for needed pip packages
+  set_fact:
+    hass_pip_packages_needed:
+      - wheel
+      - homeassistant=={{ hass_version }}
+
+- name: set fact for merged needed and additional pip packages
+  set_fact:
+    hass_pip_packages: "{{ hass_pip_packages_needed }} + {{ hass_pip_packages }}"
+  when: hass_pip_packages is defined
+
+- name: set fact for only needed pip packages
+  set_fact:
+    hass_pip_packages: "{{ hass_pip_packages_needed }}"
+  when: hass_pip_packages is not defined
+
+- name: install home assistant and additional pip packages
   pip:
-    name: homeassistant
-    version: '{{ hass_version }}'
+    name: "{{ hass_pip_packages }}"
+    state: present
+    extra_args: --upgrade
+    # version: '{{ hass_version }}'
     virtualenv: '{{ hass_virtualenv }}'
     virtualenv_command: '{{ hass_virtualenv_command }}'
   become: true
