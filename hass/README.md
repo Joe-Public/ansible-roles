@@ -22,7 +22,7 @@ Role Variables
 --------------
 
 - **hass_version**: The version of Home Assistant which will get installed. By default it is not defined and automatically gets the lastest version available during installation.
-- **hass_user**: The linux user Home Assistant is running under. Defaults to `hass`.
+- **hass_user**: The linux user running Home Assistant. Defaults to `hass`.
 - **hass_virtualenv**: The directory the virtual environment for Home Assistant gets installed to. Defaults to `/opt/hass`.
 - **hass_config**: The directory the configuration for Home Assistant is stored in. Defaults to `/home/hass/.homeassistant`.
 - **hass_w1** Enables One Wire for Raspberry Pis. Usefull if you connect One Wire sensors directly to your Raspberry Pi and want to add them to Home Assistant. By default it is disabled (`false`). If enabled a restart of the system is needed after the playbook has been deployed.
