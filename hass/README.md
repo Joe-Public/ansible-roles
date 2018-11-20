@@ -21,7 +21,7 @@ Requirements
 Role Variables
 --------------
 
-- **hass_version**: The version of Home Assistant which will get installed. By default it is not defined and gets the lastest version available.
+- **hass_version**: The version of Home Assistant which will get installed. By default it is not defined and automatically gets the lastest version available during installation.
 - **hass_user**: The linux user Home Assistant is running under. Defaults to `hass`.
 - **hass_virtualenv**: The directory the virtual environment for Home Assistant gets installed to. Defaults to `/opt/hass`.
 - **hass_config**: The directory the configuration for Home Assistant is stored in. Defaults to `/home/hass/.homeassistant`.
