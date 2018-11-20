@@ -92,7 +92,6 @@
     name: "{{ hass_pip_packages }}"
     state: present
     extra_args: --upgrade
-    # version: '{{ hass_version }}'
     virtualenv: '{{ hass_virtualenv }}'
     virtualenv_command: '{{ hass_virtualenv_command }}'
   become: true
