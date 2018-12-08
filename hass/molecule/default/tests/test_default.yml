@@ -44,6 +44,8 @@ package:
     installed: true
   python3-pip:
     installed: true
+  python3-devel:
+    installed: true
 {{end}}
 user:
   hass:
