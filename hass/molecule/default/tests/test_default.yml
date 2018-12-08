@@ -20,6 +20,14 @@ package:
     installed: true
   python3-pip:
     installed: true
+  python3-dev:
+    installed: true
+  build-essential:
+    installed: true
+  libffi-dev:
+    installed: true
+  libssl-dev:
+    installed: true
 {{end}}
 {{if eq .Env.distro "centos"}}
   python36u:
