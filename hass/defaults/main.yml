@@ -5,6 +5,7 @@ hass_user: 'hass'
 hass_config: '/home/{{ hass_user }}/.homeassistant'
 hass_virtualenv: '/opt/hass'
 hass_w1: false
+hass_bluetooth: false
 # hass_pip_packages:
 #   - "spotipy==2.4.4"
 #   - "pysonos"

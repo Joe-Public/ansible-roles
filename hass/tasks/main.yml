@@ -38,6 +38,14 @@
   when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_w1 is defined and hass_w1 and hass_user in getent_passwd
   tags: w1
 
+- name: adding user to group bluetooth
+  user:
+    name: '{{ hass_user }}'
+    groups: 'bluetooth'
+    append: true
+  when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_bluetooth is defined and hass_bluetooth and hass_user in getent_passwd
+  tags: bluetooth
+
 - name: getent passwd
   getent:
     database: passwd
