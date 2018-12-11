@@ -9,6 +9,7 @@ hass_bluetooth: false
 # hass_pip_packages:
 #   - "spotipy==2.4.4"
 #   - "pysonos"
+#   - "python-eq3bt"
 # hass_apt_packages:
 #   - libxslt-dev
 #   - libxml2-dev
