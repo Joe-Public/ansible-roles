@@ -14,6 +14,7 @@
     dest: '/boot/config.txt'
     line: 'dtoverlay=w1-gpio'
   when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_w1 is defined and hass_w1
+  tags: w1
 
 - name: getent passwd
   getent:
@@ -35,6 +36,7 @@
     groups: 'gpio'
     append: true
   when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_w1 is defined and hass_w1 and hass_user in getent_passwd
+  tags: w1
 
 - name: getent passwd
   getent:
