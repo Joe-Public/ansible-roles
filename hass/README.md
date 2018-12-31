@@ -9,6 +9,7 @@ Tested with the help of [Molecule](https://molecule.readthedocs.io/en/latest/) a
 * Ubuntu 18.04
 * Ubuntu 18.10
 * Fedora 28
+* Fedora 29
 * Centos 7
 
 Used in real life only with Raspbian (Debian 9 Stretch).

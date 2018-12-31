@@ -60,6 +60,15 @@ platforms:
       - 8128:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora29
+    image: joepublic/molecule-fedora:29
+    command: /usr/sbin/init
+    pull: false
+    privileged: true
+    published_ports:
+      - 8129:8123
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
   env:
