@@ -43,7 +43,7 @@
     name: '{{ hass_user }}'
     groups: 'bluetooth'
     append: true
-  when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_bluetooth is defined and hass_bluetooth and hass_user in getent_passwd
+  when: hass_bluetooth is defined and hass_bluetooth and hass_user in getent_passwd
   tags: bluetooth
 
 - name: getent passwd

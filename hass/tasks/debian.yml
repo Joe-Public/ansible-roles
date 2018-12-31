@@ -18,13 +18,21 @@
     state: present
   when: hass_apt_packages is defined
 
-- name: install bluetooth packages
+- name: install raspberry bluetooth packages
   apt:
     name:
       - 'pi-bluetooth'
-      - 'bluez'
     state: present
   when: ansible_lsb.id is defined and ansible_lsb.id == "Raspbian" and hass_bluetooth is defined and hass_bluetooth
+  tags: bluetooth
+
+- name: install general bluetooth packages
+  apt:
+    name:
+      - 'bluez'
+      - 'libglib2.0-dev'
+    state: present
+  when: hass_bluetooth is defined and hass_bluetooth
   tags: bluetooth
 
 - name: set debian/ubuntu virtualenv command
