@@ -17,7 +17,7 @@ Used in real life only with Raspbian (Debian 9 Stretch).
 Requirements
 ------------
 
-* ansible >= 2.2
+* ansible >= 2.6
 
 Role Variables
 --------------

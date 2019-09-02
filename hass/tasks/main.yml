@@ -24,7 +24,7 @@
   user:
     name: "{{ hass_user }}"
     comment: "Home Assistant"
-    createhome: true
+    create_home: true
     system: true
     groups: dialout
     shell: "/sbin/nologin"
