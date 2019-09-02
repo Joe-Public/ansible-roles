@@ -9,7 +9,7 @@
     state: present
 
 - name: install configured additional fedora packages
-  yum:
+  dnf:
     name: '{{ hass_packages }}'
     state: present
   when: hass_packages is defined
