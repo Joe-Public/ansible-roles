@@ -22,7 +22,7 @@ Requirements
 Role Variables
 --------------
 
-- **hass_version**: The version of Home Assistant which will get installed. By default it is not defined and automatically gets the lastest version available during installation.
+- **hass_version**: The version of Home Assistant which will get installed. By default it is not defined and automatically gets the lastest version available during installation. For Debian 9 if not specified hass_version is set to 0.95.4 (the last supported version with Python 3.5). If a newer hass_version for Debian 9 should be installed you have to make sure to have a supported version of Python installed before.
 - **hass_user**: The linux user running Home Assistant. Defaults to `hass`.
 - **hass_virtualenv**: The directory the virtual environment for Home Assistant gets installed to. Defaults to `/opt/hass`.
 - **hass_config**: The directory the configuration for Home Assistant is stored in. Defaults to `/home/hass/.homeassistant`.
