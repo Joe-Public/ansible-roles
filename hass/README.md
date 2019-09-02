@@ -6,10 +6,13 @@ An Ansible Role that installs [Home Assistant](https://www.home-assistant.io/). 
 Tested with the help of [Molecule](https://molecule.readthedocs.io/en/latest/) and [Docker](https://www.docker.com/) for:
 * Debian 9 Stretch
 * Debian 10 Buster
+* Debian 11 Bullseye
 * Ubuntu 18.04
 * Ubuntu 18.10
+* Ubuntu 19.04
 * Fedora 28
 * Fedora 29
+* Fedora 30
 * Centos 7
 
 Used in real life only with Raspbian (Debian 9 Stretch).

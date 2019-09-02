@@ -24,13 +24,22 @@ platforms:
       - 8124:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: debian11
+    image: joepublic/molecule-debian:11
+    command: /lib/systemd/systemd
+    pull: false
+    privileged: true
+    published_ports:
+      - 8125:8123
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: ubuntu18.04
     image: joepublic/molecule-ubuntu:18.04
     command: /lib/systemd/systemd
     pull: false
     privileged: true
     published_ports:
-      - 8125:8123
+      - 8126:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: ubuntu18.10
@@ -39,7 +48,16 @@ platforms:
     pull: false
     privileged: true
     published_ports:
-      - 8126:8123
+      - 8127:8123
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu19.04
+    image: joepublic/molecule-ubuntu:19.04
+    command: /lib/systemd/systemd
+    pull: false
+    privileged: true
+    published_ports:
+      - 8128:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: centos7
@@ -48,7 +66,7 @@ platforms:
     pull: false
     privileged: true
     published_ports:
-      - 8127:8123
+      - 8129:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: fedora28
@@ -57,7 +75,7 @@ platforms:
     pull: false
     privileged: true
     published_ports:
-      - 8128:8123
+      - 8130:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: fedora29
@@ -66,15 +84,28 @@ platforms:
     pull: false
     privileged: true
     published_ports:
-      - 8129:8123
+      - 8131:8123
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora30
+    image: joepublic/molecule-fedora:30
+    command: /usr/sbin/init
+    pull: false
+    privileged: true
+    published_ports:
+      - 8132:8123
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
   env:
-    ANSIBLE_GATHER_TIMEOUT: "20"
+    ANSIBLE_GATHER_TIMEOUT: "60"
   lint:
     name: ansible-lint
+  inventory:
+    host_vars:
+      fedora30:
+        ansible_python_interpreter: "/usr/bin/python3"
 scenario:
   name: default
 verifier:
