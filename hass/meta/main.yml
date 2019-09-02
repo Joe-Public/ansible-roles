@@ -1,8 +1,8 @@
 ---
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Johannes Krausmueller
+  description: installs Home Assistant
+  company:
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -15,9 +15,9 @@ galaxy_info:
   # - GPLv3
   # - Apache
   # - CC-BY
-  license: license (GPLv2, CC-BY, etc)
+  license: ISC License
 
-  min_ansible_version: 1.2
+  min_ansible_version: 2.6
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -33,17 +33,25 @@ galaxy_info:
   #
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+  platforms:
+    - name: Debian
+      versions:
+        - 9
+        - 10
+        - 11
+    - name: Ubuntu
+      versions:
+        - 18.04
+        - 18.10
+        - 19.04
+    - name: Centos
+      versions:
+        - 7
+    - name: Fedora
+      versions:
+        - 28
+        - 29
+        - 30
 
   galaxy_tags: []
   # List tags for your role here, one per line. A tag is a keyword that describes
